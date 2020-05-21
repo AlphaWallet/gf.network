@@ -1,9 +1,10 @@
 /*
 Requirements:
-·No fixed amount
-·Cannot be transferred
-·admin functions: move token, mint token, burn token
+· total 100,000,000.00, 8 decimal,
+· white list: only people in white list can transfer or receive GFT
+· admin functions: move token, manage white list
 .*/
+
 
 pragma solidity >=0.4.22 <0.6.0;
 
@@ -23,7 +24,14 @@ contract GFT is EIP20Interface {
     string public name;                   //fancy name: eg Simon Bucks
     uint8 public decimals;                //How many decimals to show.
     string public symbol;                 //An identifier: eg SBX
+    mapping (address => bool) public whitelisted;           //Addresses that are allowed to transfer or receive GFT
+    address[] public whitelistAddresses; //keep track of addresses in the whitelist
     address public admin;
+
+    modifier isOnWhiteList(address user) {
+        require(whitelisted[user] == true || user == admin);
+        _;
+    }
 
     modifier adminOnly() {
         require(msg.sender == admin);
@@ -35,27 +43,26 @@ contract GFT is EIP20Interface {
         string memory _tokenName,
         uint8 _decimalUnits,
         string memory _tokenSymbol,
-        address _admin
+        address _admin,
+        address[] memory _approvedAddresses
     ) public {
         balances[msg.sender] = _initialAmount;               // Give the creator all initial tokens
-        totalSupply = 0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff;   // unlimited
+        totalSupply = _initialAmount;                        // Update total supply
         name = _tokenName;                                   // Set the name for display purposes
         decimals = _decimalUnits;                            // Amount of decimals for display purposes
         symbol = _tokenSymbol;                               // Set the symbol for display purposes
         admin = _admin;
+        whitelistAddresses = _approvedAddresses;
     }
 
-    function mint(address to, uint amountToMint) public adminOnly returns (bool success) {
-        balances[to] = amountToMint;
-        return true;
+    function addToWhiteList(address[] memory approvedAddresses) public adminOnly {
+        for(uint i = 0; i < approvedAddresses.length; i++) {
+            whitelistAddresses.push(approvedAddresses[i]);
+            whitelisted[approvedAddresses[i]] = true;
+        }
     }
 
-    function burn(address from, uint amountToBurn) public adminOnly returns (bool success) {
-        balances[from] -= amountToBurn;
-        return true;
-    }
-
-    function transfer(address _to, uint256 _value) public adminOnly returns (bool success) {
+    function transfer(address _to, uint256 _value) public isOnWhiteList(msg.sender) returns (bool success) {
         require(balances[msg.sender] >= _value);
         balances[msg.sender] -= _value;
         balances[_to] += _value;
@@ -63,7 +70,7 @@ contract GFT is EIP20Interface {
         return true;
     }
 
-    function transferFrom(address _from, address _to, uint256 _value) public adminOnly returns (bool success) {
+    function transferFrom(address _from, address _to, uint256 _value) public isOnWhiteList(msg.sender) returns (bool success) {
         uint256 allowance = allowed[_from][msg.sender];
         require(balances[_from] >= _value && allowance >= _value);
         balances[_to] += _value;
@@ -79,7 +86,7 @@ contract GFT is EIP20Interface {
         return balances[_owner];
     }
 
-    function approve(address _spender, uint256 _value) public adminOnly returns (bool success) {
+    function approve(address _spender, uint256 _value) public isOnWhiteList(_spender) isOnWhiteList(msg.sender) returns (bool success) {
         allowed[msg.sender][_spender] = _value;
         emit Approval(msg.sender, _spender, _value); //solhint-disable-line indent, no-unused-vars
         return true;
@@ -88,4 +95,5 @@ contract GFT is EIP20Interface {
     function allowance(address _owner, address _spender) public view returns (uint256 remaining) {
         return allowed[_owner][_spender];
     }
+
 }

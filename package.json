@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "solidityFlattener.pl --contractsdir=contracts --mainsol=GFO.sol --outputsol=GFO-flattened.sol --verbose && solidityFlattener.pl --contractsdir=contracts --mainsol=GFT.sol --outputsol=GFT-flattened.sol --verbose"
+    "buildContracts": "solidityFlattener.pl --contractsdir=contracts --mainsol=GFO.sol --outputsol=GFO-flattened.sol --verbose && solidityFlattener.pl --contractsdir=contracts --mainsol=GFT.sol --outputsol=GFT-flattened.sol --verbose",
+    "buildTokenScripts": "cd TS/GFT && make GFT-TokenScript.canonicalized.xml && cd .. && cd ./GFO && make GFO-TokenScript.canonicalized.xml && cd ../../"
   },
   "repository": {
     "type": "git",
