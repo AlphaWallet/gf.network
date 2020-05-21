@@ -1,0 +1,20 @@
+{
+  "name": "gf.network",
+  "version": "1.0.0",
+  "description": "TokenScripts &amp; Smart Contracts for the gf.network project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "solidityFlattener.pl --contractsdir=contracts --mainsol=GFO.sol --outputsol=GFO-flattened.sol --verbose && solidityFlattener.pl --contractsdir=contracts --mainsol=GFT.sol --outputsol=GFT-flattened.sol --verbose"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlphaWallet/gf.network.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlphaWallet/gf.network/issues"
+  },
+  "homepage": "https://github.com/AlphaWallet/gf.network#readme"
+}

@@ -29,7 +29,7 @@ contract GFO is EIP20Interface {
     address public admin;
 
     modifier isOnWhiteList(address user) {
-        require(whitelist[user] == true || user == admin);
+        require(whitelisted[user] == true || user == admin);
         _;
     }
 
@@ -40,11 +40,11 @@ contract GFO is EIP20Interface {
 
     constructor(
         uint256 _initialAmount,
-        string _tokenName,
+        string memory _tokenName,
         uint8 _decimalUnits,
-        string _tokenSymbol,
+        string memory _tokenSymbol,
         address _admin,
-        address[] _approvedAddresses
+        address[] memory _approvedAddresses
     ) public {
         balances[msg.sender] = _initialAmount;               // Give the creator all initial tokens
         totalSupply = _initialAmount;                        // Update total supply
@@ -52,11 +52,11 @@ contract GFO is EIP20Interface {
         decimals = _decimalUnits;                            // Amount of decimals for display purposes
         symbol = _tokenSymbol;                               // Set the symbol for display purposes
         admin = _admin;
-        whiteListAddresses = _approvedAddresses;
+        whitelistAddresses = _approvedAddresses;
     }
 
-    function addToWhiteList(address[] approvedAddresses) public adminOnly {
-        for(int i = 0; i < approvedAddresses.length; i++) {
+    function addToWhiteList(address[] memory approvedAddresses) public adminOnly {
+        for(uint i = 0; i < approvedAddresses.length; i++) {
             whitelistAddresses.push(approvedAddresses[i]);
             whitelisted[approvedAddresses[i]] = true;
         }
@@ -86,8 +86,7 @@ contract GFO is EIP20Interface {
         return balances[_owner];
     }
 
-    function approve(address _spender, uint256 _value) public isOnWhiteList(spender) returns (bool success) {
-        isOnWhiteList(msg.sender);
+    function approve(address _spender, uint256 _value) public isOnWhiteList(_spender) isOnWhiteList(msg.sender) returns (bool success) {
         allowed[msg.sender][_spender] = _value;
         emit Approval(msg.sender, _spender, _value); //solhint-disable-line indent, no-unused-vars
         return true;

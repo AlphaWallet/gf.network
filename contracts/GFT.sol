@@ -5,11 +5,9 @@ Requirements:
 ·admin functions: move token, mint token, burn token
 .*/
 
-
 pragma solidity >=0.4.22 <0.6.0;
 
 import "./EIP20Interface.sol";
-
 
 contract GFT is EIP20Interface {
 
@@ -25,21 +23,39 @@ contract GFT is EIP20Interface {
     string public name;                   //fancy name: eg Simon Bucks
     uint8 public decimals;                //How many decimals to show.
     string public symbol;                 //An identifier: eg SBX
+    address public admin;
+
+    modifier adminOnly() {
+        require(msg.sender == admin);
+        _;
+    }
 
     constructor(
         uint256 _initialAmount,
-        string _tokenName,
+        string memory _tokenName,
         uint8 _decimalUnits,
-        string _tokenSymbol
+        string memory _tokenSymbol,
+        address _admin
     ) public {
         balances[msg.sender] = _initialAmount;               // Give the creator all initial tokens
-        totalSupply = _initialAmount;                        // Update total supply
+        totalSupply = 0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff;   // unlimited
         name = _tokenName;                                   // Set the name for display purposes
         decimals = _decimalUnits;                            // Amount of decimals for display purposes
         symbol = _tokenSymbol;                               // Set the symbol for display purposes
+        admin = _admin;
     }
 
-    function transfer(address _to, uint256 _value) public returns (bool success) {
+    function mint(address to, uint amountToMint) public adminOnly returns (bool success) {
+        balances[to] = amountToMint;
+        return true;
+    }
+
+    function burn(address from, uint amountToBurn) public adminOnly returns (bool success) {
+        balances[from] -= amountToBurn;
+        return true;
+    }
+
+    function transfer(address _to, uint256 _value) public adminOnly returns (bool success) {
         require(balances[msg.sender] >= _value);
         balances[msg.sender] -= _value;
         balances[_to] += _value;
@@ -47,7 +63,7 @@ contract GFT is EIP20Interface {
         return true;
     }
 
-    function transferFrom(address _from, address _to, uint256 _value) public returns (bool success) {
+    function transferFrom(address _from, address _to, uint256 _value) public adminOnly returns (bool success) {
         uint256 allowance = allowed[_from][msg.sender];
         require(balances[_from] >= _value && allowance >= _value);
         balances[_to] += _value;
@@ -63,7 +79,7 @@ contract GFT is EIP20Interface {
         return balances[_owner];
     }
 
-    function approve(address _spender, uint256 _value) public returns (bool success) {
+    function approve(address _spender, uint256 _value) public adminOnly returns (bool success) {
         allowed[msg.sender][_spender] = _value;
         emit Approval(msg.sender, _spender, _value); //solhint-disable-line indent, no-unused-vars
         return true;
