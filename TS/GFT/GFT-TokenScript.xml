@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE token  [
         <!ENTITY style SYSTEM "shared.css">
-        <!ENTITY about.en SYSTEM "about.en.js">
-        <!ENTITY approve.en SYSTEM "approve.en.js">
+        <!ENTITY move.en SYSTEM "move.en.js">
+        <!ENTITY add.en SYSTEM "add.en.js">
+        <!ENTITY remove.en SYSTEM "remove.en.js">
+        <!ENTITY view.en SYSTEM "view.en.js">
         ]>
 
 <ts:token
@@ -43,43 +45,126 @@
         <ts:ethereum contract="GFT"/>
         <!-- as above ts:contract name -->
     </ts:origins>
+    <!-- TODO use the admin attribute, not working right now due to a lack of checksum -->
+    <ts:selection id="notAdmin" filter="!(ownerAddress=0x0D590124d2fAaBbbdFa5561ccBf778914a50BCca)">
+        <ts:label>
+            <ts:string xml:lang="en">Must be the admin</ts:string>
+        </ts:label>
+    </ts:selection>
     <ts:cards>
-        <ts:card type="action">
+        <ts:card type="action" exclude="notAdmin">
             <ts:label>
-                <ts:string xml:lang="en">About</ts:string>
+                <ts:string xml:lang="en">Move</ts:string>
             </ts:label>
-            <ts:view
-                xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-                <style type="text/css">&style;</style>
-                <script type="text/javascript">&about.en;</script>
-            </ts:view>
-        </ts:card>
-        <ts:card type="action">
-            <ts:label>
-                <ts:string xml:lang="en">Approve</ts:string>
-            </ts:label>
-            <ts:attribute-type name="approvalAddress" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+
+            <ts:attribute-type name="from" syntax="1.3.6.1.4.1.1466.115.121.1.36">
                 <ts:label>
-                    <ts:string xml:lang="en">Approval Address</ts:string>
+                    <ts:string xml:lang="en">to address</ts:string>
                 </ts:label>
                 <ts:origins>
                     <ts:user-entry as="address"/>
                 </ts:origins>
             </ts:attribute-type>
+
+            <ts:attribute-type name="to" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+                <ts:label>
+                    <ts:string xml:lang="en">to address</ts:string>
+                </ts:label>
+                <ts:origins>
+                    <ts:user-entry as="address"/>
+                </ts:origins>
+            </ts:attribute-type>
+
+            <ts:attribute-type name="amount" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+                <ts:label>
+                    <ts:string xml:lang="en">amount</ts:string>
+                </ts:label>
+                <ts:origins>
+                    <ts:user-entry as="e8"/>
+                </ts:origins>
+            </ts:attribute-type>
+
             <ts:transaction>
-                <ethereum:transaction function="approve" contract="GFT" as="uint">
+                <ethereum:transaction function="transferFrom" contract="GFO" as="uint">
                     <ts:data>
-                        <ts:address ref="approvalAddress"/>
-                        <ts:uint256>115792089237316195423570985008687907853269984665640564039457584007913129639935</ts:uint256>
+                        <ts:address ref="from"/>
+                        <ts:address ref="to"/>
+                        <ts:uint256 ref="amount"/>
                     </ts:data>
                 </ethereum:transaction>
             </ts:transaction>
             <ts:view
-                xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+                    xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
                 <style type="text/css">&style;</style>
-                <script type="text/javascript">&approve.en;</script>
+                <script type="text/javascript">&move.en;</script>
             </ts:view>
         </ts:card>
+
+        <ts:card type="action" exclude="notAdmin">
+            <ts:label>
+                <ts:string xml:lang="en">Add</ts:string>
+            </ts:label>
+
+            <ts:attribute-type name="addAddress" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+                <ts:label>
+                    <ts:string xml:lang="en">to address</ts:string>
+                </ts:label>
+                <ts:origins>
+                    <ts:user-entry as="address"/>
+                </ts:origins>
+            </ts:attribute-type>
+
+            <ts:transaction>
+                <ethereum:transaction function="addToWhiteList" contract="GFT">
+                    <ts:data>
+                        <ts:address ref="addAddress"/>
+                    </ts:data>
+                </ethereum:transaction>
+            </ts:transaction>
+            <ts:view
+                    xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+                <style type="text/css">&style;</style>
+                <script type="text/javascript">&add.en;</script>
+            </ts:view>
+        </ts:card>
+
+        <ts:card type="action" exclude="notAdmin">
+            <ts:label>
+                <ts:string xml:lang="en">Remove</ts:string>
+            </ts:label>
+
+            <ts:attribute-type name="removalAddress" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+                <ts:label>
+                    <ts:string xml:lang="en">removal address</ts:string>
+                </ts:label>
+                <ts:origins>
+                    <ts:user-entry as="address"/>
+                </ts:origins>
+            </ts:attribute-type>
+
+            <ts:transaction>
+                <ethereum:transaction function="removeFromWhiteList" contract="GFT">
+                    <ts:data>
+                        <ts:address ref="removalAddress"/>
+                    </ts:data>
+                </ethereum:transaction>
+            </ts:transaction>
+            <ts:view xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+                <style type="text/css">&style;</style>
+                <script type="text/javascript">&remove.en;</script>
+            </ts:view>
+        </ts:card>
+
+        <ts:card type="action" exclude="notAdmin">
+            <ts:label>
+                <ts:string xml:lang="en">View</ts:string>
+            </ts:label>
+            <ts:view xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+                <style type="text/css">&style;</style>
+                <script type="text/javascript">&view.en;</script>
+            </ts:view>
+        </ts:card>
+
     </ts:cards>
     <ts:attribute-type name="admin" syntax="1.3.6.1.4.1.1466.115.121.1.15">
         <ts:label>

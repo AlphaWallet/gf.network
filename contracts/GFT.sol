@@ -55,10 +55,23 @@ contract GFT is EIP20Interface {
         whitelistAddresses = _approvedAddresses;
     }
 
+    //TODO may want to make add/remove whitelist functions only take a single address rather than an array
     function addToWhiteList(address[] memory approvedAddresses) public adminOnly {
         for(uint i = 0; i < approvedAddresses.length; i++) {
             whitelistAddresses.push(approvedAddresses[i]);
             whitelisted[approvedAddresses[i]] = true;
+        }
+    }
+
+    function removeFromWhiteList(address[] memory removalAddresses) public adminOnly {
+        for(uint i = 0; i < removalAddresses.length; i++) {
+            whitelisted[removalAddresses[i]] = false;
+            for(uint j = 0; j < whitelistAddresses.length; j++) {
+                if(removalAddresses[i] == whitelistAddresses[j]) {
+                    delete whitelistAddresses[j];
+                    break;
+                }
+            }
         }
     }
 
