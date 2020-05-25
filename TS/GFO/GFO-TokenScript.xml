@@ -45,8 +45,7 @@
         <ts:ethereum contract="GFO"/>
         <!-- as above ts:contract name -->
     </ts:origins>
-    <!-- TODO use the admin attribute, not working right now due to a lack of checksum -->
-    <ts:selection id="notAdmin" filter="!(ownerAddress=0x0D590124d2fAaBbbdFa5561ccBf778914a50BCca)">
+    <ts:selection id="notAdmin" filter="!(ownerAddress=admin)">
         <ts:label>
             <ts:string xml:lang="en">Must be the admin</ts:string>
         </ts:label>
@@ -57,23 +56,29 @@
                 <ts:string xml:lang="en">Issue</ts:string>
             </ts:label>
 
-            <ts:attribute-type name="to" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+            <ts:attribute name="to">
+                <ts:type>
+                    <ts:syntax>1.3.6.1.4.1.1466.115.121.1.15</ts:syntax>
+                </ts:type>
                 <ts:label>
                     <ts:string xml:lang="en">to address</ts:string>
                 </ts:label>
                 <ts:origins>
                     <ts:user-entry as="address"/>
                 </ts:origins>
-            </ts:attribute-type>
+            </ts:attribute>
 
-            <ts:attribute-type name="amount" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+            <ts:attribute name="amount">
+                <ts:type>
+                    <ts:syntax>1.3.6.1.4.1.1466.115.121.1.36</ts:syntax>
+                </ts:type>
                 <ts:label>
                     <ts:string xml:lang="en">amount</ts:string>
                 </ts:label>
                 <ts:origins>
                     <ts:user-entry as="e8"/>
                 </ts:origins>
-            </ts:attribute-type>
+            </ts:attribute>
 
             <ts:transaction>
                 <ethereum:transaction function="mint" contract="GFO" as="uint">
@@ -95,32 +100,41 @@
                 <ts:string xml:lang="en">Move</ts:string>
             </ts:label>
 
-            <ts:attribute-type name="from" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+            <ts:attribute name="from">
+                <ts:type>
+                    <ts:syntax>1.3.6.1.4.1.1466.115.121.1.36</ts:syntax>
+                </ts:type>
                 <ts:label>
                     <ts:string xml:lang="en">to address</ts:string>
                 </ts:label>
                 <ts:origins>
                     <ts:user-entry as="address"/>
                 </ts:origins>
-            </ts:attribute-type>
+            </ts:attribute>
 
-            <ts:attribute-type name="to" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+            <ts:attribute name="to">
+                <ts:type>
+                    <ts:syntax>1.3.6.1.4.1.1466.115.121.1.36</ts:syntax>
+                </ts:type>
                 <ts:label>
                     <ts:string xml:lang="en">to address</ts:string>
                 </ts:label>
                 <ts:origins>
                     <ts:user-entry as="address"/>
                 </ts:origins>
-            </ts:attribute-type>
+            </ts:attribute>
 
-            <ts:attribute-type name="amount" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+            <ts:attribute name="amount">
+                <ts:type>
+                    <ts:syntax>1.3.6.1.4.1.1466.115.121.1.36</ts:syntax>
+                </ts:type>
                 <ts:label>
                     <ts:string xml:lang="en">amount</ts:string>
                 </ts:label>
                 <ts:origins>
                     <ts:user-entry as="e8"/>
                 </ts:origins>
-            </ts:attribute-type>
+            </ts:attribute>
 
             <ts:transaction>
                 <ethereum:transaction function="transferFrom" contract="GFO" as="uint">
@@ -139,49 +153,64 @@
         </ts:card>
     </ts:cards>
 
-    <ts:attribute-type name="admin" syntax="1.3.6.1.4.1.1466.115.121.1.15">
+    <ts:attribute name="admin">
+        <ts:type>
+            <ts:syntax>1.3.6.1.4.1.1466.115.121.1.15</ts:syntax>
+        </ts:type>
         <ts:label>
             <ts:string xml:lang="en">admin</ts:string>
         </ts:label>
         <ts:origins>
             <ethereum:call function="admin" contract="GFO" as="address"/>
         </ts:origins>
-    </ts:attribute-type>
+    </ts:attribute>
 
-    <ts:attribute-type name="decimals" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+    <ts:attribute name="decimals">
+        <ts:type>
+            <ts:syntax>1.3.6.1.4.1.1466.115.121.1.36</ts:syntax>
+        </ts:type>
         <ts:label>
             <ts:string xml:lang="en">decimals</ts:string>
         </ts:label>
         <ts:origins>
             <ethereum:call function="decimals" contract="GFO" as="uint"/>
         </ts:origins>
-    </ts:attribute-type>
+    </ts:attribute>
 
-    <ts:attribute-type name="name" syntax="1.3.6.1.4.1.1466.115.121.1.26">
+    <ts:attribute name="name">
+        <ts:type>
+            <ts:syntax>1.3.6.1.4.1.1466.115.121.1.26</ts:syntax>
+        </ts:type>
         <ts:label>
             <ts:string xml:lang="en">name</ts:string>
         </ts:label>
         <ts:origins>
             <ethereum:call function="name" contract="GFO" as="utf8"/>
         </ts:origins>
-    </ts:attribute-type>
+    </ts:attribute>
 
-    <ts:attribute-type name="symbol" syntax="1.3.6.1.4.1.1466.115.121.1.26">
+    <ts:attribute name="symbol">
+        <ts:type>
+            <ts:syntax>1.3.6.1.4.1.1466.115.121.1.26</ts:syntax>
+        </ts:type>
         <ts:label>
             <ts:string xml:lang="en">symbol</ts:string>
         </ts:label>
         <ts:origins>
             <ethereum:call function="symbol" contract="GFO" as="utf8"/>
         </ts:origins>
-    </ts:attribute-type>
+    </ts:attribute>
 
-    <ts:attribute-type name="totalSupply" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+    <ts:attribute name="totalSupply">
+        <ts:type>
+            <ts:syntax>1.3.6.1.4.1.1466.115.121.1.36</ts:syntax>
+        </ts:type>
         <ts:label>
             <ts:string xml:lang="en">totalSupply</ts:string>
         </ts:label>
         <ts:origins>
             <ethereum:call function="totalSupply" contract="GFO" as="uint"/>
         </ts:origins>
-    </ts:attribute-type>
+    </ts:attribute>
 
 </ts:token>
