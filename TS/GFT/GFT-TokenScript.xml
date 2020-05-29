@@ -6,9 +6,7 @@
         <!ENTITY remove.en SYSTEM "remove.en.js">
         <!ENTITY view.en SYSTEM "view.en.js">
         ]>
-
-<ts:token
-    xmlns:ts="http://tokenscript.org/2020/06/tokenscript"
+<ts:token xmlns:ts="http://tokenscript.org/2020/06/tokenscript"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:asnx="urn:ietf:params:xml:ns:asnx"
@@ -45,10 +43,11 @@
         <ts:ethereum contract="GFT"/>
         <!-- as above ts:contract name -->
     </ts:origins>
-    <ts:selection id="notAdmin" filter="!(ownerAddress=admin)">
-        <ts:denial>
+    <!-- TODO change to admin attribute -->
+    <ts:selection id="notAdmin" filter="!(ownerAddress=0x0D590124d2fAaBbbdFa5561ccBf778914a50BCca)">
+        <ts:label>
             <ts:string xml:lang="en">Must be the admin</ts:string>
-        </ts:denial>
+        </ts:label>
     </ts:selection>
     <ts:cards>
         <ts:card type="action" exclude="notAdmin">
@@ -101,8 +100,7 @@
                     </ts:data>
                 </ethereum:transaction>
             </ts:transaction>
-            <ts:view
-                    xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+            <ts:view xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
                 <style type="text/css">&style;</style>
                 <script type="text/javascript">&move.en;</script>
             </ts:view>
@@ -132,8 +130,7 @@
                     </ts:data>
                 </ethereum:transaction>
             </ts:transaction>
-            <ts:view
-                    xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+            <ts:view xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
                 <style type="text/css">&style;</style>
                 <script type="text/javascript">&add.en;</script>
             </ts:view>
@@ -169,7 +166,7 @@
             </ts:view>
         </ts:card>
 
-        <ts:card type="action" exclude="notAdmin">
+        <ts:card type="action">
             <ts:label>
                 <ts:string xml:lang="en">View</ts:string>
             </ts:label>

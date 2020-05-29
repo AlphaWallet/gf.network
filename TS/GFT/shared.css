@@ -4,6 +4,22 @@ h3 { color: #111; font-family: 'Open Sans', sans-serif; font-size: 20px; font-we
   text-align: center;
 }
 
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
 html,
 body {
   height: 100%;
