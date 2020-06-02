@@ -16,26 +16,6 @@
     <ts:label>
         <ts:string xml:lang="en">GFO</ts:string>
     </ts:label>
-    <ts:contract name="contractWithEventTransfer">
-        <ts:address network="4">0xf2c56a50c373993c881f5f216278852e65b29fb8</ts:address>
-        <asnx:module name="Transfer">
-            <sequence>
-                <element name="_from" ethereum:type="address" ethereum:indexed="true"/>
-                <element name="_to" ethereum:type="address" ethereum:indexed="true"/>
-                <element name="_value" ethereum:type="uint256" ethereum:indexed="false"/>
-            </sequence>
-        </asnx:module>
-    </ts:contract>
-    <ts:contract name="contractWithEventApproval">
-        <ts:address network="4">0x8289Fe21203987911E9F67cCe514A681D3A1883c</ts:address>
-        <asnx:module name="Approval">
-            <sequence>
-                <element name="_owner" ethereum:type="address" ethereum:indexed="true"/>
-                <element name="_spender" ethereum:type="address" ethereum:indexed="true"/>
-                <element name="_value" ethereum:type="uint256" ethereum:indexed="false"/>
-            </sequence>
-        </asnx:module>
-    </ts:contract>
     <ts:contract interface="erc20" name="GFO">
         <ts:address network="4">0x8289Fe21203987911E9F67cCe514A681D3A1883c</ts:address>
         <!--mainnet-->
@@ -45,7 +25,7 @@
         <ts:ethereum contract="GFO"/>
         <!-- as above ts:contract name -->
     </ts:origins>
-    <ts:selection id="notAdmin" filter="!(ownerAddress=admin)">
+    <ts:selection name="notAdmin" filter="!(ownerAddress=admin)">
         <ts:label>
             <ts:string xml:lang="en">Must be the admin</ts:string>
         </ts:label>
