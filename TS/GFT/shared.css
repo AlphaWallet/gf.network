@@ -7,7 +7,7 @@ h3 { color: #111; font-family: 'Open Sans', sans-serif; font-size: 20px; font-we
 table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
-  width: 100%;
+  table-layout: fixed;
 }
 
 td, th {
