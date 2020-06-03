@@ -4,6 +4,10 @@ h3 { color: #111; font-family: 'Open Sans', sans-serif; font-size: 20px; font-we
   text-align: center;
 }
 
+#yourAddress {
+  word-break: break-all;
+}
+
 html,
 body {
   height: 100%;

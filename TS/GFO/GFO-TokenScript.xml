@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE token  [
     <!ENTITY style SYSTEM "shared.css">
-    <!ENTITY move.en SYSTEM "move.en.js">
+    <!ENTITY move.en SYSTEM "../GFT/move.en.js">
     <!ENTITY issue.en SYSTEM "issue.en.js">
 ]>
 <ts:token
@@ -56,7 +56,7 @@
                     <ts:string xml:lang="en">amount</ts:string>
                 </ts:label>
                 <ts:origins>
-                    <ts:user-entry as="e8"/>
+                    <ts:user-entry as="e18"/>
                 </ts:origins>
             </ts:attribute>
 
@@ -68,8 +68,7 @@
                     </ts:data>
                 </ethereum:transaction>
             </ts:transaction>
-            <ts:view
-                    xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+            <ts:view xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
                 <style type="text/css">&style;</style>
                 <script type="text/javascript">&issue.en;</script>
             </ts:view>
@@ -82,10 +81,10 @@
 
             <ts:attribute name="from">
                 <ts:type>
-                    <ts:syntax>1.3.6.1.4.1.1466.115.121.1.36</ts:syntax>
+                    <ts:syntax>1.3.6.1.4.1.1466.115.121.1.15</ts:syntax>
                 </ts:type>
                 <ts:label>
-                    <ts:string xml:lang="en">to address</ts:string>
+                    <ts:string xml:lang="en">from address</ts:string>
                 </ts:label>
                 <ts:origins>
                     <ts:user-entry as="address"/>
@@ -94,7 +93,7 @@
 
             <ts:attribute name="to">
                 <ts:type>
-                    <ts:syntax>1.3.6.1.4.1.1466.115.121.1.36</ts:syntax>
+                    <ts:syntax>1.3.6.1.4.1.1466.115.121.1.15</ts:syntax>
                 </ts:type>
                 <ts:label>
                     <ts:string xml:lang="en">to address</ts:string>
@@ -112,7 +111,7 @@
                     <ts:string xml:lang="en">amount</ts:string>
                 </ts:label>
                 <ts:origins>
-                    <ts:user-entry as="e8"/>
+                    <ts:user-entry as="e18"/>
                 </ts:origins>
             </ts:attribute>
 
@@ -125,8 +124,7 @@
                     </ts:data>
                 </ethereum:transaction>
             </ts:transaction>
-            <ts:view
-                xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+            <ts:view xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
                 <style type="text/css">&style;</style>
                 <script type="text/javascript">&move.en;</script>
             </ts:view>
