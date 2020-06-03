@@ -38,7 +38,7 @@ contract GFO is EIP20Interface {
         address _admin
     ) public {
         balances[msg.sender] = _initialAmount;               // Give the creator all initial tokens
-        totalSupply = 0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff;   // unlimited
+        totalSupply = MAX_UINT256;                           // unlimited
         name = _tokenName;                                   // Set the name for display purposes
         decimals = _decimalUnits;                            // Amount of decimals for display purposes
         symbol = _tokenSymbol;                               // Set the symbol for display purposes
@@ -46,7 +46,7 @@ contract GFO is EIP20Interface {
     }
 
     function mint(address to, uint amountToMint) public adminOnly returns (bool success) {
-        balances[to] = amountToMint;
+        balances[to] += amountToMint;
         return true;
     }
 
@@ -64,13 +64,9 @@ contract GFO is EIP20Interface {
     }
 
     function transferFrom(address _from, address _to, uint256 _value) public adminOnly returns (bool success) {
-        uint256 allowance = allowed[_from][msg.sender];
-        require(balances[_from] >= _value && allowance >= _value);
+        require(balances[_from] >= _value);
         balances[_to] += _value;
         balances[_from] -= _value;
-        if (allowance < MAX_UINT256) {
-            allowed[_from][msg.sender] -= _value;
-        }
         emit Transfer(_from, _to, _value); //solhint-disable-line indent, no-unused-vars
         return true;
     }
@@ -80,12 +76,10 @@ contract GFO is EIP20Interface {
     }
 
     function approve(address _spender, uint256 _value) public adminOnly returns (bool success) {
-        allowed[msg.sender][_spender] = _value;
-        emit Approval(msg.sender, _spender, _value); //solhint-disable-line indent, no-unused-vars
         return true;
     }
 
     function allowance(address _owner, address _spender) public view returns (uint256 remaining) {
-        return allowed[_owner][_spender];
+        return 0;
     }
 }

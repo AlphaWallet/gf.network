@@ -17,7 +17,7 @@
         <ts:string xml:lang="en">GFO</ts:string>
     </ts:label>
     <ts:contract interface="erc20" name="GFO">
-        <ts:address network="4">0xf2c56a50c373993c881f5f216278852e65b29fb8</ts:address>
+        <ts:address network="4">0x95854bD60F667Ac70d2bFCa41e87D16c09B6Dd03</ts:address>
         <!--mainnet-->
     </ts:contract>
     <ts:origins>
