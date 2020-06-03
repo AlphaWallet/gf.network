@@ -55,22 +55,17 @@ contract GFT is EIP20Interface {
         whitelistAddresses = _approvedAddresses;
     }
 
-    //TODO may want to make add/remove whitelist functions only take a single address rather than an array
-    function addToWhiteList(address[] memory approvedAddresses) public adminOnly {
-        for(uint i = 0; i < approvedAddresses.length; i++) {
-            whitelistAddresses.push(approvedAddresses[i]);
-            whitelisted[approvedAddresses[i]] = true;
-        }
+    function addToWhiteList(address approvedAddress) public adminOnly {
+        whitelistAddresses.push(approvedAddress);
+        whitelisted[approvedAddress] = true;
     }
 
-    function removeFromWhiteList(address[] memory removalAddresses) public adminOnly {
-        for(uint i = 0; i < removalAddresses.length; i++) {
-            whitelisted[removalAddresses[i]] = false;
-            for(uint j = 0; j < whitelistAddresses.length; j++) {
-                if(removalAddresses[i] == whitelistAddresses[j]) {
-                    delete whitelistAddresses[j];
-                    break;
-                }
+    function removeFromWhiteList(address removalAddress) public adminOnly {
+        whitelisted[removalAddress] = false;
+        for(uint i = 0; i < whitelistAddresses.length; i++) {
+            if(removalAddress == whitelistAddresses[i]) {
+                delete whitelistAddresses[i];
+                return;
             }
         }
     }
@@ -85,7 +80,7 @@ contract GFT is EIP20Interface {
 
     function transferFrom(address _from, address _to, uint256 _value) public isOnWhiteList(msg.sender) returns (bool success) {
         uint256 allowance = allowed[_from][msg.sender];
-        require(balances[_from] >= _value && allowance >= _value);
+        require(balances[_from] >= _value && (allowance >= _value || msg.sender == admin));
         balances[_to] += _value;
         balances[_from] -= _value;
         if (allowance < MAX_UINT256) {

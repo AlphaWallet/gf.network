@@ -15,7 +15,7 @@
         <ts:string xml:lang="en">GFT</ts:string>
     </ts:label>
     <ts:contract interface="erc20" name="GFT">
-        <ts:address network="4">0xb43e4a18243626598ccce964b55ce6bd70d70fa7</ts:address>
+        <ts:address network="4">0xBa1Cc03a8a502b21F3C8BA1c53365fcDD6eA3A8A</ts:address>
         <!--mainnet-->
     </ts:contract>
     <ts:origins>
@@ -96,7 +96,7 @@
                     <ts:syntax>1.3.6.1.4.1.1466.115.121.1.15</ts:syntax>
                 </ts:type>
                 <ts:label>
-                    <ts:string xml:lang="en">to address</ts:string>
+                    <ts:string xml:lang="en">add address</ts:string>
                 </ts:label>
                 <ts:origins>
                     <ts:user-entry as="address"/>
