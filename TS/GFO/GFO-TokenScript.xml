@@ -3,6 +3,7 @@
     <!ENTITY style SYSTEM "shared.css">
     <!ENTITY move.en SYSTEM "../GFT/move.en.js">
     <!ENTITY issue.en SYSTEM "issue.en.js">
+    <!ENTITY about.en SYSTEM "../GFT/about.en.js">
 ]>
 <ts:token
     xmlns:ts="http://tokenscript.org/2020/06/tokenscript"
@@ -31,6 +32,17 @@
         </ts:label>
     </ts:selection>
     <ts:cards>
+
+        <ts:card type="action">
+            <ts:label>
+                <ts:string xml:lang="en">About</ts:string>
+            </ts:label>
+            <ts:view xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+                <style type="text/css">&style;</style>
+                <script type="text/javascript">&about.en;</script>
+            </ts:view>
+        </ts:card>
+
         <ts:card type="action" exclude="notAdmin">
             <ts:label>
                 <ts:string xml:lang="en">Issue</ts:string>
