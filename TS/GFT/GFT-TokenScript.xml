@@ -158,7 +158,7 @@
             </ts:view>
         </ts:card>
 
-        <ts:card type="action">
+        <ts:card type="action" exclude="notAdmin">
             <ts:label>
                 <ts:string xml:lang="en">View</ts:string>
             </ts:label>
