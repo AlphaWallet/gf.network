@@ -19,7 +19,7 @@
         <ts:string xml:lang="en">GFO</ts:string>
     </ts:label>
     <ts:contract interface="erc20" name="GFO">
-        <ts:address network="4">0x95854bD60F667Ac70d2bFCa41e87D16c09B6Dd03</ts:address>
+        <ts:address network="4">0x601E6A0C71d8872962fc9347E23f0D190C4194f3</ts:address>
         <!--mainnet-->
     </ts:contract>
     <ts:origins>
@@ -27,7 +27,8 @@
         <ts:ethereum contract="GFO"/>
         <!-- as above ts:contract name -->
     </ts:origins>
-    <ts:selection name="notAdmin" filter="!(ownerAddress=0x0D590124d2fAaBbbdFa5561ccBf778914a50BCca)">
+    <!-- TODO change to admin attribute -->
+    <ts:selection name="notAdmin" filter="!(ownerAddress=0xD40EBAaA4Cb7fC3a5D7B373309F68B2ABCe5F1C5)">
         <ts:label>
             <ts:string xml:lang="en">Must be the admin</ts:string>
         </ts:label>

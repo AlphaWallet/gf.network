@@ -1,12 +1,13 @@
 {
   "name": "gf.network",
   "version": "1.0.0",
-  "description": "TokenScripts &amp; Smart Contracts for the gf.network project",
+  "description": "TokenScripts & Smart Contracts for the gf.network project",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "buildContracts": "solidityFlattener.pl --contractsdir=contracts --mainsol=GFO.sol --outputsol=GFO-flattened.sol --verbose && solidityFlattener.pl --contractsdir=contracts --mainsol=GFT.sol --outputsol=GFT-flattened.sol --verbose",
-    "buildTokenScripts": "cd TS/GFT && make GFT-TokenScript.canonicalized.xml && cd .. && cd ./GFO && make GFO-TokenScript.canonicalized.xml && cd ../../"
+    "buildTokenScripts": "cd TS/GFT && make GFT-TokenScript.canonicalized.xml && cd .. && cd ./GFO && make GFO-TokenScript.canonicalized.xml && cd ../../",
+    "build": "npm run buildContracts && npm run buildTokenScripts"
   },
   "repository": {
     "type": "git",

@@ -16,7 +16,7 @@
         <ts:string xml:lang="en">GFT</ts:string>
     </ts:label>
     <ts:contract interface="erc20" name="GFT">
-        <ts:address network="4">0xBa1Cc03a8a502b21F3C8BA1c53365fcDD6eA3A8A</ts:address>
+        <ts:address network="4">0x8C65D444Bf9a183e0fB26D7692AFce7a4F20cf3D</ts:address>
         <!--mainnet-->
     </ts:contract>
     <ts:origins>
@@ -25,7 +25,7 @@
         <!-- as above ts:contract name -->
     </ts:origins>
     <!-- TODO change to admin attribute -->
-    <ts:selection name="notAdmin" filter="!(ownerAddress=0x0D590124d2fAaBbbdFa5561ccBf778914a50BCca)">
+    <ts:selection name="notAdmin" filter="!(ownerAddress=0xD40EBAaA4Cb7fC3a5D7B373309F68B2ABCe5F1C5)">
         <ts:label>
             <ts:string xml:lang="en">Must be the admin</ts:string>
         </ts:label>
