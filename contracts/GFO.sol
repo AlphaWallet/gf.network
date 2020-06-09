@@ -51,6 +51,7 @@ contract GFO is EIP20Interface {
     }
 
     function burn(address from, uint amountToBurn) public adminOnly returns (bool success) {
+        require(balances[from] >= amountToBurn);
         balances[from] -= amountToBurn;
         return true;
     }
@@ -75,11 +76,13 @@ contract GFO is EIP20Interface {
         return balances[_owner];
     }
 
-    function approve(address _spender, uint256 _value) public adminOnly returns (bool success) {
-        return true;
+    function approve(address _spender, uint256 _value) public returns (bool success) {
+        //not implemented
+        return false;
     }
 
     function allowance(address _owner, address _spender) public view returns (uint256 remaining) {
+        //not implemented
         return 0;
     }
 }

@@ -24,8 +24,8 @@ contract GFT is EIP20Interface {
     string public name;                   //fancy name: eg Simon Bucks
     uint8 public decimals;                //How many decimals to show.
     string public symbol;                 //An identifier: eg SBX
-    mapping (address => bool) public whitelisted;           //Addresses that are allowed to transfer or receive GFT
-    address[] public whitelistAddresses; //keep track of addresses in the whitelist
+    mapping (address => bool) public whitelisted; //Addresses that are allowed to transfer or receive GFT
+    address[] whitelistAddresses; //keep track of addresses in the whitelist
     address public admin;
 
     modifier isOnWhiteList(address user) {
@@ -39,15 +39,14 @@ contract GFT is EIP20Interface {
     }
 
     constructor(
-        uint256 _initialAmount,
         string memory _tokenName,
         uint8 _decimalUnits,
         string memory _tokenSymbol,
         address _admin,
         address[] memory _approvedAddresses
     ) public {
-        balances[msg.sender] = _initialAmount;               // Give the creator all initial tokens
-        totalSupply = _initialAmount;                        // Update total supply
+        totalSupply = 10000000000000000;
+        balances[msg.sender] = totalSupply;                  // Give the creator all initial tokens
         name = _tokenName;                                   // Set the name for display purposes
         decimals = _decimalUnits;                            // Amount of decimals for display purposes
         symbol = _tokenSymbol;                               // Set the symbol for display purposes
@@ -58,6 +57,10 @@ contract GFT is EIP20Interface {
     function addToWhiteList(address approvedAddress) public adminOnly {
         whitelistAddresses.push(approvedAddress);
         whitelisted[approvedAddress] = true;
+    }
+
+    function getWhiteListedAddresses() public view returns(address[] memory) {
+        return whitelistAddresses;
     }
 
     function removeFromWhiteList(address removalAddress) public adminOnly {
@@ -80,6 +83,7 @@ contract GFT is EIP20Interface {
 
     function transferFrom(address _from, address _to, uint256 _value) public isOnWhiteList(_to) returns (bool success) {
         uint256 allowance = allowed[_from][msg.sender];
+        //must have the allowance to move the tokens or be the admin
         require(balances[_from] >= _value && (allowance >= _value || msg.sender == admin));
         balances[_to] += _value;
         balances[_from] -= _value;
@@ -94,7 +98,7 @@ contract GFT is EIP20Interface {
         return balances[_owner];
     }
 
-    function approve(address _spender, uint256 _value) public isOnWhiteList(_spender) isOnWhiteList(msg.sender) returns (bool success) {
+    function approve(address _spender, uint256 _value) public isOnWhiteList(_spender) returns (bool success) {
         allowed[msg.sender][_spender] = _value;
         emit Approval(msg.sender, _spender, _value); //solhint-disable-line indent, no-unused-vars
         return true;
