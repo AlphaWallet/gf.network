@@ -24,7 +24,7 @@
         <ts:ethereum contract="GFT"/>
         <!-- as above ts:contract name -->
     </ts:origins>
-    <ts:selection name="notAdmin" filter="!(ownerAddress=admin)">
+    <ts:selection name="notAdmin" filter="!(ownerAddress=${admin})">
         <ts:label>
             <ts:string xml:lang="en">Must be the admin</ts:string>
         </ts:label>
