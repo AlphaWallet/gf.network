@@ -43,7 +43,7 @@
 
         <ts:card type="action" exclude="notAdmin">
             <ts:label>
-                <ts:string xml:lang="en">Move</ts:string>
+                <ts:string xml:lang="en">Move tokens</ts:string>
             </ts:label>
 
             <ts:attribute name="from">
@@ -99,7 +99,7 @@
 
         <ts:card type="action" exclude="notAdmin">
             <ts:label>
-                <ts:string xml:lang="en">Add</ts:string>
+                <ts:string xml:lang="en">Add to whitelist</ts:string>
             </ts:label>
 
             <ts:attribute name="addAddress">
@@ -129,7 +129,7 @@
 
         <ts:card type="action" exclude="notAdmin">
             <ts:label>
-                <ts:string xml:lang="en">Remove</ts:string>
+                <ts:string xml:lang="en">Remove from whitelist</ts:string>
             </ts:label>
 
             <ts:attribute name="removalAddress">
@@ -159,14 +159,13 @@
 
         <ts:card type="action" exclude="notAdmin">
             <ts:label>
-                <ts:string xml:lang="en">View</ts:string>
+                <ts:string xml:lang="en">View holders</ts:string>
             </ts:label>
             <ts:view xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
                 <style type="text/css">&style;</style>
                 <script type="text/javascript">&view.en;</script>
             </ts:view>
         </ts:card>
-
     </ts:cards>
     <ts:attribute name="admin">
         <ts:type>

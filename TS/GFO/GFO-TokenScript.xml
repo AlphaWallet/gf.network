@@ -46,7 +46,7 @@
 
         <ts:card type="action" exclude="notAdmin">
             <ts:label>
-                <ts:string xml:lang="en">Issue</ts:string>
+                <ts:string xml:lang="en">Issue tokens</ts:string>
             </ts:label>
 
             <ts:attribute name="to">
@@ -89,7 +89,7 @@
 
         <ts:card type="action" exclude="notAdmin">
             <ts:label>
-                <ts:string xml:lang="en">Move</ts:string>
+                <ts:string xml:lang="en">Move tokens</ts:string>
             </ts:label>
 
             <ts:attribute name="from">
@@ -145,7 +145,7 @@
 
         <ts:card type="action" exclude="notAdmin">
             <ts:label>
-                <ts:string xml:lang="en">View</ts:string>
+                <ts:string xml:lang="en">View holders</ts:string>
             </ts:label>
             <ts:view xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
                 <style type="text/css">&style;</style>
