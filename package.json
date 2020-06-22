@@ -8,7 +8,8 @@
     "buildContracts": "solidityFlattener.pl --contractsdir=contracts --mainsol=GFO.sol --outputsol=GFO-flattened.sol --verbose && solidityFlattener.pl --contractsdir=contracts --mainsol=GFT.sol --outputsol=GFT-flattened.sol --verbose",
     "buildTokenScripts": "make ./TS/GFT/GFT-TokenScript.canonicalized.xml && make ./TS/GFO/GFO-TokenScript.canonicalized.xml",
     "build": "npm run buildContracts && npm run buildTokenScripts",
-    "clean": "rm ./TS/GFT/GFT-TokenScript.canonicalized.xml && rm ./TS/GFO/GFO-TokenScript.canonicalized.xml && rm GFO-flattened.sol && rm GFT-flattened.sol"
+    "clean": "rm ./TS/GFT/GFT-TokenScript.canonicalized.xml && rm ./TS/GFO/GFO-TokenScript.canonicalized.xml && rm GFO-flattened.sol && rm GFT-flattened.sol",
+    "cleanBuild": "npm run clean && npm run build"
   },
   "repository": {
     "type": "git",
