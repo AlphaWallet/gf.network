@@ -5,6 +5,7 @@
         <!ENTITY add.en SYSTEM "add.en.js">
         <!ENTITY remove.en SYSTEM "remove.en.js">
         <!ENTITY view.en SYSTEM "view.en.js">
+        <!ENTITY view-whitelist.en SYSTEM "view-whitelist.en.js">
         <!ENTITY about.en SYSTEM "about.en.js">
         ]>
 <ts:token xmlns:ts="http://tokenscript.org/2020/06/tokenscript"
@@ -159,7 +160,7 @@
 
         <ts:card type="action" exclude="notAdmin">
             <ts:label>
-                <ts:string xml:lang="en">View</ts:string>
+                <ts:string xml:lang="en">View Holders</ts:string>
             </ts:label>
             <ts:view xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
                 <style type="text/css">&style;</style>
@@ -167,7 +168,30 @@
             </ts:view>
         </ts:card>
 
+        <ts:card type="action" exclude="notAdmin">
+            <ts:label>
+                <ts:string xml:lang="en">View Whitelist</ts:string>
+            </ts:label>
+            <ts:view xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+                <style type="text/css">&style;</style>
+                <script type="text/javascript">&view-whitelist.en;</script>
+            </ts:view>
+        </ts:card>
+
     </ts:cards>
+
+    <ts:attribute name="whitelist">
+        <ts:type>
+            <ts:syntax>1.3.6.1.4.1.1466.115.121.1.15</ts:syntax>
+        </ts:type>
+        <ts:label>
+            <ts:string xml:lang="en">whitelist</ts:string>
+        </ts:label>
+        <ts:origins>
+            <ethereum:call function="getWhiteListedAddresses" contract="GFT" as="address"/>
+        </ts:origins>
+    </ts:attribute>
+
     <ts:attribute name="admin">
         <ts:type>
             <ts:syntax>1.3.6.1.4.1.1466.115.121.1.15</ts:syntax>
