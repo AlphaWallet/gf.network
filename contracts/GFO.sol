@@ -30,6 +30,10 @@ contract GFO is EIP20Interface {
         _;
     }
 
+    event Mint(address indexed to, uint indexed amount);
+    event Burn(address indexed from, uint indexed amount);
+
+
     constructor(
         uint256 _initialAmount,
         string memory _tokenName,
@@ -47,12 +51,14 @@ contract GFO is EIP20Interface {
 
     function mint(address to, uint amountToMint) public adminOnly returns (bool success) {
         balances[to] += amountToMint;
+        emit Mint(to, amountToMint);
         return true;
     }
 
     function burn(address from, uint amountToBurn) public adminOnly returns (bool success) {
         require(balances[from] >= amountToBurn);
         balances[from] -= amountToBurn;
+        emit Burn(from, amountToBurn);
         return true;
     }
 

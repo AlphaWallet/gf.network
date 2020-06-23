@@ -22,4 +22,3 @@ _tokenName: gf.network
 _decimalUnits: 8
 _tokenSymbol: GFT
 _admin: 0xD40EBAaA4Cb7fC3a5D7B373309F68B2ABCe5F1C5
-_approvedAddresses: ["0xD40EBAaA4Cb7fC3a5D7B373309F68B2ABCe5F1C5"]

@@ -28,6 +28,10 @@ contract GFT is EIP20Interface {
     address[] whitelistAddresses; //keep track of addresses in the whitelist
     address public admin;
 
+    event Whitelisted(address indexed whitelistedAddress);
+    event RemovedFromWhitelist(address indexed whitelistedAddress);
+
+
     modifier isOnWhiteList(address user) {
         require(whitelisted[user] == true || user == admin);
         _;
@@ -39,24 +43,25 @@ contract GFT is EIP20Interface {
     }
 
     constructor(
+        uint _totalSupply,
         string memory _tokenName,
         uint8 _decimalUnits,
         string memory _tokenSymbol,
-        address _admin,
-        address[] memory _approvedAddresses
+        address _admin
     ) public {
-        totalSupply = 10000000000000000;
+        totalSupply = _totalSupply;
         balances[msg.sender] = totalSupply;                  // Give the creator all initial tokens
         name = _tokenName;                                   // Set the name for display purposes
         decimals = _decimalUnits;                            // Amount of decimals for display purposes
         symbol = _tokenSymbol;                               // Set the symbol for display purposes
         admin = _admin;
-        whitelistAddresses = _approvedAddresses;
     }
 
     function addToWhiteList(address approvedAddress) public adminOnly {
+        require(!whitelisted[approvedAddress]);
         whitelistAddresses.push(approvedAddress);
         whitelisted[approvedAddress] = true;
+        emit Whitelisted(approvedAddress);
     }
 
     function getWhiteListedAddresses() public view returns(address[] memory) {
@@ -68,6 +73,7 @@ contract GFT is EIP20Interface {
         for(uint i = 0; i < whitelistAddresses.length; i++) {
             if(removalAddress == whitelistAddresses[i]) {
                 delete whitelistAddresses[i];
+                emit RemovedFromWhitelist(whitelistAddresses[i]);
                 return;
             }
         }
