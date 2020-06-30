@@ -22,3 +22,17 @@ _tokenName: gf.network
 _decimalUnits: 8
 _tokenSymbol: GFT
 _admin: 0xD40EBAaA4Cb7fC3a5D7B373309F68B2ABCe5F1C5
+
+## GFO constructor for mainnet deployment
+_initialAmount: 10000000000000000000
+_tokenName: gf.network
+_decimalUnits: 18
+_tokenSymbol: GFO
+_admin: 0xd751dA11BD2eD230df99f4AD3fC117A40C685C29
+
+## GFT constructor for mainnet deployment
+_initialAmount: 1000000000000000000
+_tokenName: gf.network
+_decimalUnits: 8
+_tokenSymbol: GFT
+_admin: 0xd751dA11BD2eD230df99f4AD3fC117A40C685C29

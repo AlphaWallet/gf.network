@@ -16,9 +16,9 @@ class Token {
     populateTokenHolderTable() {
         let contractAddress = "";
         if(this.props.label === "GFO") {
-            contractAddress = "0x6b175474e89094c44da98b954eedeac495271d0f";
+            contractAddress = "0x1702f4210C4a7fE0b02c91Eb4Ad183B192c9099A";
         } else {
-            contractAddress = "0x6b175474e89094c44da98b954eedeac495271d0f";
+            contractAddress = "0xFf06Cc9F65bc35876CAb2bfAd4BBd23030D3856e";
         }
         let query = `https://api.bloxy.info/token/token_holders_list?token=${contractAddress}&key=ACCfS4FPxR0o2&format=table`;
         let xmlHttp = new XMLHttpRequest();

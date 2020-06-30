@@ -19,8 +19,8 @@
         <ts:string xml:lang="en">GFO</ts:string>
     </ts:label>
     <ts:contract interface="erc20" name="GFO">
+        <ts:address network="1">0x1702f4210C4a7fE0b02c91Eb4Ad183B192c9099A</ts:address>
         <ts:address network="4">0x9925A9B35d99aE89Cd5B0985c2E1dBADDdef98FE</ts:address>
-        <!--mainnet-->
     </ts:contract>
     <ts:origins>
         <!-- Define the contract which holds the token that the user will use -->
