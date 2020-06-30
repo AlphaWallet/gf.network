@@ -41,7 +41,7 @@ contract GFO is EIP20Interface {
         string memory _tokenSymbol,
         address _admin
     ) public {
-        balances[msg.sender] = _initialAmount;               // Give the creator all initial tokens
+        balances[_admin] = _initialAmount;               // Give the creator all initial tokens
         totalSupply = MAX_UINT256;                           // unlimited
         name = _tokenName;                                   // Set the name for display purposes
         decimals = _decimalUnits;                            // Amount of decimals for display purposes

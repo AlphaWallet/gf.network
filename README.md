@@ -31,7 +31,7 @@ _tokenSymbol: GFO
 _admin: 0xd751dA11BD2eD230df99f4AD3fC117A40C685C29
 
 ## GFT constructor for mainnet deployment
-_initialAmount: 1000000000000000000
+_totalSupply: 1000000000000000000
 _tokenName: gf.network
 _decimalUnits: 8
 _tokenSymbol: GFT

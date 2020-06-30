@@ -50,7 +50,7 @@ contract GFT is EIP20Interface {
         address _admin
     ) public {
         totalSupply = _totalSupply;
-        balances[msg.sender] = totalSupply;                  // Give the creator all initial tokens
+        balances[_admin] = totalSupply;                  // Give the creator all initial tokens
         name = _tokenName;                                   // Set the name for display purposes
         decimals = _decimalUnits;                            // Amount of decimals for display purposes
         symbol = _tokenSymbol;                               // Set the symbol for display purposes
