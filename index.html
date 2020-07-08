@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GFO holders</title>
+    <link rel="stylesheet" href="./TS/GFT/shared.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.ethers.io/lib/ethers-5.0.umd.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function() {
+            let abi = [ "function balanceOf(address owner) view returns (uint256)" ];
+            let contract = new ethers.Contract( "0x45690554247e89eeD3bbc36887082FB2774b92C8" , abi , ethers.getDefaultProvider() );
+            let eventQuery = "https://api-cn.etherscan.com/api?module=logs&action=" +
+                "getLogs&fromBlock=10366315&toBlock=latest&address=0x45690554247e89eeD3bbc36887082FB2774b92C8&apikey=Y9IADJRJPAVZPZ8HFEYFQTCSYWKY49AGZ8";
+
+            getBalancesMapping(function(rankedHolders, balancesOrdered) {
+                let table = document.getElementById("tokenHolders");
+                document.getElementById("status").hidden = true;
+                for(let i = 0; i < rankedHolders.length; i++) {
+                    let rank = i + 1;
+                    let element = `
+                        <td>${rank}</td>
+                        <td>${rankedHolders[i]}</td>
+                        <td>${balancesOrdered[i]}</td>
+                    `;
+                    let child = document.createElement('tr');
+                    child.innerHTML = element;
+                    table.appendChild(child);
+                }
+            });
+
+            function getHolders(cb) {
+                let holders = [];
+                $.get(eventQuery, function(data) {
+                    for(let obj of data.result) {
+                        holders.push('0x' + obj.topics[1].substring(26));
+                    }
+                    //remove duplicates
+                    cb(Array.from(new Set(holders)));
+                });
+            }
+
+            function getBalancesMapping(cb) {
+                let balancesMapping = {};
+                getHolders(async function(holders) {
+                    for(let i = 0; i < holders.length; i++) {
+                        let balance = await contract.balanceOf(holders[i]);
+                        balancesMapping[holders[i]] = parseInt(balance) / 1e+18;
+                        if(i === holders.length - 1) {
+                            let rankedHolders = Object.keys(balancesMapping).sort(function(a, b) {
+                                return balancesMapping[b] - balancesMapping[a];
+                            });
+                            let balancesOrdered = rankedHolders.map(key => balancesMapping[key]);
+                            cb(rankedHolders, balancesOrdered);
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</head>
+<body>
+    <div>
+        <table id="tokenHolders">
+            <tr>
+                <th>Rank</th>
+                <th>Address</th>
+                <th>Quantity</th>
+            </tr>
+        </table>
+        <p id="status"><strong>Loading...</strong></p>
+    </div>
+</body>
+</html>
